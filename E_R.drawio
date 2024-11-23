@@ -1,0 +1,39 @@
+digraph ER {
+  // Entities
+  "DEPENDENCIES" [label=<<b>DEPENDENCIES</b>>, shape=plaintext, color=blue];
+  "USERS" [label=<<b>USERS</b>>, shape=plaintext, color=blue];
+  "LOGS" [label=<<b>LOGS</b>>, shape=plaintext, color=blue];
+
+  // Attributes for DEPENDENCIES
+  "DEPENDENCIES" -> "id" [label="int", color=black];
+  "DEPENDENCIES" -> "label" [label="string", color=black];
+  "DEPENDENCIES" -> "comment" [label="text", color=black];
+  "DEPENDENCIES" -> "dependency" [label="string", color=black];
+  "DEPENDENCIES" -> "prerequisite" [label="string", color=black];
+  "DEPENDENCIES" -> "usage_instructions" [label="text", color=black];
+  "DEPENDENCIES" -> "deployment_script" [label="text", color=black];
+
+  // Attributes for USERS
+  "USERS" -> "user_id" [label="int", color=black];
+  "USERS" -> "username" [label="string", color=black];
+  "USERS" -> "password" [label="string", color=black];
+  "USERS" -> "role" [label="string", color=black];
+
+  // Attributes for LOGS
+  "LOGS" -> "log_id" [label="int", color=black];
+  "LOGS" -> "user_id" [label="int", color=black];
+  "LOGS" -> "operation" [label="string", color=black];
+  "LOGS" -> "timestamp" [label="datetime", color=black];
+
+  // Primary Keys
+  "id" -> "PK" [label="", arrowhead=none, color=red];
+  "user_id" -> "PK" [label="", arrowhead=none, color=red];
+  "log_id" -> "PK" [label="", arrowhead=none, color=red];
+
+  // Foreign Key
+  "user_id" -> "FK" [label="", arrowhead=none, color=red];
+
+  // Relationships
+  "DEPENDENCIES" -- "LOGS" [label="contains", arrowhead=odot];
+  "USERS" -- "LOGS" [label="performs", arrowhead=odot];
+}
